@@ -2,6 +2,9 @@ package terse;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.util.*;
 
 /**
@@ -70,6 +73,27 @@ public class Json {
                 put((String) vs[i], vs[i + 1]);
             }
         }
+        
+        /**
+         * Fluent put() that returns this for method chaining.
+         * Note: This overrides HashMap's put() which normally returns the old value.
+         * @param key the key
+         * @param value the value
+         * @return this JsonObj for chaining
+         */
+        public JsonObj __(String key, Object value) {
+            super.put(key, value);
+            return this;
+        }
+
+        /**
+         * Converts this JsonObj to Jackson's ObjectNode.
+         * Useful when you need to work with Jackson's tree model.
+         * @return ObjectNode representation
+         */
+        public ObjectNode asNode(){
+            return MAPPER.valueToTree(this);
+        }
 
         @Override
         public String toString() {
@@ -93,6 +117,26 @@ public class Json {
          */
         public JsonArr(Object... vs) {
             addAll(Arrays.asList(vs));
+        }
+
+        /**
+         * Fluent add() that returns this for method chaining.
+         * Note: This overrides ArrayList's add() which normally returns boolean.
+         * @param element the element to add
+         * @return this JsonArr for chaining
+         */
+        public JsonArr __(Object element) {
+            super.add(element);
+            return this;
+        }
+
+        /**
+         * Converts this JsonArr to Jackson's ArrayNode.
+         * Useful when you need to work with Jackson's tree model.
+         * @return ArrayNode representation
+         */
+        public ArrayNode asNode(){
+            return MAPPER.valueToTree(this);
         }
 
         @Override
