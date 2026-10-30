@@ -106,3 +106,14 @@ ai-context-guide.md
 # notes
 test-logs
 prp
+
+### BROKK'S CONFIGURATION ###
+.brokk/**
+/.brokk/workspace.properties
+/.brokk/sessions/
+/.brokk/dependencies/
+/.brokk/history.zip
+!AGENTS.md
+!.brokk/style.md
+!.brokk/review.md
+!.brokk/project.properties
