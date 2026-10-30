@@ -1,6 +1,6 @@
 # TerseJson
 
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.xyz-jphil/tersejson.svg)](https://central.sonatype.com/artifact/io.github.xyz-jphil/tersejson)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.littlejlib/littlejlib-tersejson.svg)](https://central.sonatype.com/artifact/io.github.littlejlib/littlejlib-tersejson)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Minimal-ceremony JSON object builder for Java. Build JSON with the terseness of JavaScript, the type-safety of Java collections, and full Jackson integration.
@@ -27,11 +27,13 @@ String json = obj(
 
 ```xml
 <dependency>
-    <groupId>io.github.xyz-jphil</groupId>
-    <artifactId>tersejson</artifactId>
+    <groupId>io.github.littlejlib</groupId>
+    <artifactId>littlejlib-tersejson</artifactId>
     <version>1.0</version>
 </dependency>
 ```
+
+Moved from `io.github.xyz-jphil:tersejson:1.0` (still on Maven Central). The Java package is unchanged: `terse`.
 
 ## Requirements
 
@@ -229,11 +231,11 @@ jacksonRoot.set("user", terseObj.asNode());
 
 ## Related Projects
 
-- [TerseRest](https://github.com/xyz-jphil/terserest) - Minimal-ceremony REST API client (uses TerseJson for JSON building)
+- [TerseRest](https://github.com/littlejlib/terserest) - Minimal-ceremony REST API client (uses TerseJson for JSON building)
 
 ## Contributing
 
-Issues and pull requests welcome at [GitHub](https://github.com/xyz-jphil/tersejson).
+Issues and pull requests welcome at [GitHub](https://github.com/littlejlib/tersejson).
 
 ## License
 

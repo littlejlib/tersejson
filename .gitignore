@@ -94,7 +94,8 @@ fileHistory/
 *.symbols.md
 ai-context-guide.md
 .claude
-# CLAUDE.md
+CLAUDE.md
+AGENTS.md
 # active.instructions.md
 # implemented.instructions.md
 # vision.md
@@ -113,7 +114,6 @@ prp
 /.brokk/sessions/
 /.brokk/dependencies/
 /.brokk/history.zip
-!AGENTS.md
 !.brokk/style.md
 !.brokk/review.md
 !.brokk/project.properties

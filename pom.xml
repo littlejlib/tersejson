@@ -5,14 +5,14 @@
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.github.xyz-jphil</groupId>
-    <artifactId>tersejson</artifactId>
+    <groupId>io.github.littlejlib</groupId>
+    <artifactId>littlejlib-tersejson</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
     <name>TerseJson</name>
     <description>Terse JSON object builder utility for Java</description>
-    <url>https://github.com/xyz-jphil/tersejson</url>
+    <url>https://github.com/littlejlib/tersejson</url>
 
     <licenses>
         <license>
@@ -24,17 +24,17 @@
 
     <developers>
         <developer>
-            <id>xyz-jphil</id>
+            <id>littlejlib</id>
             <name>Ivan Velikanov</name>
             <email>ivan.velikanov.dev@gmail.com</email>
-            <url>https://github.com/xyz-jphil</url>
+            <url>https://github.com/littlejlib</url>
         </developer>
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/xyz-jphil/tersejson.git</connection>
-        <developerConnection>scm:git:ssh://github.com:xyz-jphil/tersejson.git</developerConnection>
-        <url>https://github.com/xyz-jphil/tersejson</url>
+        <connection>scm:git:https://github.com/littlejlib/tersejson.git</connection>
+        <developerConnection>scm:git:git@github.com:littlejlib/tersejson.git</developerConnection>
+        <url>https://github.com/littlejlib/tersejson</url>
     </scm>
 
     <properties>
@@ -77,69 +77,75 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.2</version>
             </plugin>
-            <!-- Source JAR -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>3.3.0</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- Javadoc JAR -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.6.3</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- GPG Signing -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>3.1.0</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <keyname>${org.gpg.keyname}</keyname>
-                    <passphrase>${org.gpg.passphrase}</passphrase>
-                    <gpgArguments>
-                        <arg>--pinentry-mode</arg>
-                        <arg>loopback</arg>
-                    </gpgArguments>
-                </configuration>
-            </plugin>
-            <!-- Central Publishing Plugin for Maven Central deployment -->
-            <plugin>
-                <groupId>org.sonatype.central</groupId>
-                <artifactId>central-publishing-maven-plugin</artifactId>
-                <version>0.9.0</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <publishingServerId>${org.publishing.server.id}</publishingServerId>
-                    <autoPublish>true</autoPublish>
-                    <waitUntil>published</waitUntil>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>release</id>
+            <activation>
+                <property><name>org.name</name></property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>3.3.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals><goal>jar-no-fork</goal></goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.6.3</version>
+                        <configuration>
+                            <doclint>none</doclint>
+                            <additionalOptions>--no-fonts</additionalOptions>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals><goal>jar</goal></goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>3.1.0</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals><goal>sign</goal></goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <keyname>${org.gpg.keyname}</keyname>
+                            <passphrase>${org.gpg.passphrase}</passphrase>
+                            <gpgArguments>
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <version>0.9.0</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <publishingServerId>${org.publishing.server.id}</publishingServerId>
+                            <autoPublish>true</autoPublish>
+                            <waitUntil>published</waitUntil>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
